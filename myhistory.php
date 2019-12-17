@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
+require_once 'Dao.php';
+$dao= new Dao();
 ?>
 <html>
     <head>
@@ -9,8 +11,8 @@ session_start();
     </head>
     <body>
         <div class="header">
-            <img class="logo" src="https://www.brandcrowd.com/gallery/brands/pictures/picture15540681577672.jpg " alt="Music Logo"></a>
-            <img class="header_img" src="https://headerart.weebly.com/uploads/5/7/5/7/5757212/2229333_orig.jpg" alt="Music Header"></a>
+            <a><img class="logo" src="https://www.brandcrowd.com/gallery/brands/pictures/picture15540681577672.jpg " alt="Music Logo"></a>
+            <a><img class="header_img" src="https://headerart.weebly.com/uploads/5/7/5/7/5757212/2229333_orig.jpg" alt="Music Header"></a>
         </div>
         <div class="topnav">
             <a href="index.php">Home</a>
@@ -28,9 +30,9 @@ session_start();
         </div>
         <?php
         if( isset( $_SESSION['User'] ) ) { 
-            print_r("<h1>Your current history is empty.</h1>"); 
+            print_r("<div>".$dao->getHistory($_SESSION['User']."</div>")); 
         } else {
-            print_r("<h1>Please log in to see your information.</h1>");
+            print_r("<h1>Please log in to see your history.</h1>");
         }
         ?>
         <div id="footer">

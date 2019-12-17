@@ -16,6 +16,15 @@ private $password = "7ee61dfc";
 
      return $connection;
   } 
+    
+public function getHistory($email) {
+    $conn = $this-> getConnection();
+    $sql = "Select sentence from History where email = :email";
+    $q = $conn->prepare($sql);
+    $q->bindParam(':email', $email);
+    $q->execute();
+    return $q;
+}
  
 public function saveUser($email,$passWord){
     $conn = $this-> getConnection();
@@ -39,7 +48,15 @@ public function getLogIn($inputEmail,$passWord){
     else{
         return false;
     }
-   
 }
+    
+public function saveSentence($email,$sentence){
+    $conn = $this-> getConnection();
+    $saveQuery = "insert into History (email,sentence) values (:email,:sentence)";
+    $q = $conn->prepare($saveQuery);
+    $q->bindParam(':email', $email);
+    $q->bindParam(':sentence', $sentence);
+    $q->execute();
+ }
     
 }
